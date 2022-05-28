@@ -1,0 +1,11 @@
+- name: Roles call
+  hosts: all
+  
+  vars:
+    your_name: ubuntudaniel
+    user: ansible
+    password: ansible
+    your_full_name: daniel_shepelev
+  roles:
+    - ubuntu
+    - Centos

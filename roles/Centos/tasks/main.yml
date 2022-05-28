@@ -1,0 +1,33 @@
+- name: Creates directory
+  file:
+    path: /tmp/{{your_full_name}}
+    state: directory
+    mode: 0644
+  when: ansible_distribution == "CentOS"
+
+- name: Install a list of packages with a list variable
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - iotop
+    - sysstat
+  when: ansible_distribution == "CentOS"
+
+- name: List files and folder in home directory
+  shell: 'cat /etc/centos-release'
+  register: command_output
+  when: ansible_distribution == "CentOS"
+
+- name: Print the distribution version
+  debug: 
+    var: command_output.stdout_lines
+  when: ansible_distribution == "CentOS"  
+- name: Update all installed packages using YUM module
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+    update_only: yes
+  register: yum_update_status
+  when: ansible_distribution == "CentOS"

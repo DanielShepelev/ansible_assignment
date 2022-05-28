@@ -1,0 +1,8 @@
+[ubuntus]
+ubuntu20 ansible_host=192.168.14.5 ansible_ssh_user=ubuntu20 ansible_sudo_pass='1656'
+
+[centoses]
+centos7 ansible_host=192.168.14.12 ansible_ssh_user=centos7 ansible_sudo_pass='1656'
+
+
+

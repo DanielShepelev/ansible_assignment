@@ -1,0 +1,53 @@
+
+
+- name: Set a hostname  
+  hostname:
+    name: "{{your_name}}"
+
+  when: ansible_distribution == "Ubuntu"  
+
+- name: Create a login user
+  user:
+    name: "{{ user }}"
+    password: "{{ password }}"
+    groups:
+      - sudo
+    state: present
+  when: ansible_distribution == "Ubuntu"  
+
+- name: Install a list of packages
+  apt:
+    pkg:
+    - git
+    - chrony
+  when: ansible_distribution == "Ubuntu"
+
+- name: deploy chrony.conf template
+  template:
+     src: /home/daniel/parallel_home_assignment/roles/ubuntu/tasks/chrony.conf.j2
+     dest: /etc/chrony/chrony.conf
+     owner: root
+     group: root
+     mode: 0644
+     backup: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Restart chronyd
+  service:
+    name: chrony
+    state: restarted
+  when: ansible_distribution == "Ubuntu"
+
+- name: Remove ntpdate package 
+  apt:
+    pkg: ntpdate
+    state: absent
+  when: ansible_distribution == "Ubuntu"
+
+- lineinfile:
+    path: /home/ubuntu20/.bashrc
+    line: "export HISTTIMEFORMAT='%d/%m/%y %T '"
+  when: ansible_distribution == "Ubuntu"
+
+
+
