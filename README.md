@@ -9,7 +9,7 @@ On the Ansible instance please install ansible and write a playbook to configure
 and Ubuntu.
 Created a playbook that contains 2 roles ( one for centos and one for ubuntu )
 ubuntu: 
-• Changed the hostname to “ubuntu_{your_name}”
+• Changed the hostname to “ubuntu{your_name}”
 • Created a local user ( user name: ansible password: ansible )
 • Installed the following packages:
  1. git
